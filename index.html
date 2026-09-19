@@ -6,875 +6,1069 @@
   <title>zjy66的宝藏箱</title>
   <!-- 引入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入优质字体 -->
+  <!-- 引入字体与 Lucide 图标库 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- 引入 Phosphor 图标库 -->
-  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
-      background-color: #06080e;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      background-color: #05070e;
       overflow-x: hidden;
     }
 
-    /* 科技感星云与网格背景 */
-    .bg-tech-aurora {
+    /* 科技星空与渐变光晕背景 */
+    .bg-tech-glow {
       background: 
-        radial-gradient(circle at 12% 10%, rgba(79, 70, 229, 0.16), transparent 40%),
-        radial-gradient(circle at 88% 20%, rgba(147, 51, 234, 0.14), transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(6, 182, 212, 0.10), transparent 50%);
-    }
-    
-    .bg-grid-mesh {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-      background-size: 24px 24px;
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15), transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(168, 85, 247, 0.14), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(14, 165, 233, 0.12), transparent 50%);
     }
 
-    /* 统一卡片基础尺寸与毛玻璃质感，避免任何高低拉伸不齐 */
-    .box-card {
-      background: rgba(15, 23, 42, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    .bg-mesh {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* 所有卡片统一定高与毛玻璃效果，确保每一行卡片完全平齐 */
+    .project-card {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      height: 210px; /* 固定卡片高度，绝不高矮不一 */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      min-height: 205px;
-      height: 100%;
     }
 
-    .box-card:hover {
+    .project-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(99, 102, 241, 0.45);
-      box-shadow: 0 14px 28px -8px rgba(99, 102, 241, 0.25), 0 0 16px rgba(99, 102, 241, 0.12);
-    }
-
-    /* 预留空位卡片的柔和待定样式 */
-    .slot-card {
-      background: rgba(15, 23, 42, 0.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px dashed rgba(255, 255, 255, 0.14);
-      min-height: 205px;
-      height: 100%;
-      transition: all 0.25s ease;
-    }
-
-    .slot-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(148, 163, 184, 0.4);
-      background: rgba(30, 41, 59, 0.45);
+      border-color: rgba(129, 140, 248, 0.5);
+      box-shadow: 0 16px 32px -8px rgba(79, 70, 229, 0.25), 0 0 12px rgba(99, 102, 241, 0.15);
+      background: rgba(22, 33, 58, 0.75);
     }
   </style>
 </head>
 
-<body class="min-h-screen text-slate-100 bg-tech-aurora relative flex flex-col justify-between selection:bg-indigo-500/30 selection:text-indigo-200">
-  <div class="fixed inset-0 bg-grid-mesh pointer-events-none -z-10"></div>
+<body class="min-h-screen text-slate-100 bg-tech-glow relative flex flex-col justify-between selection:bg-indigo-500/40 selection:text-indigo-200">
+  <div class="fixed inset-0 bg-mesh pointer-events-none -z-10"></div>
 
   <!-- 顶部标题与搜索栏 -->
   <header class="w-full max-w-7xl mx-auto pt-12 pb-8 px-4 sm:px-6">
-    <div class="text-center space-y-3.5">
+    <div class="text-center space-y-4">
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
-        <i class="ph-bold ph-cube text-sm"></i>
-        <span>Creative Lab & Simulator Vault</span>
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        <span>Personal Vault & Interactive Lab</span>
       </div>
 
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white flex items-center justify-center gap-3">
         <span>zjy66 的宝藏箱</span>
-        <span class="text-2xl sm:text-3xl">✨</span>
       </h1>
 
-      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-        收集有趣的仿真模拟、物理实验与个人数字化探索。点击卡片直接启动。
+      <p class="text-slate-400 text-sm sm:text-base max-w-lg mx-auto">
+        收集物理模拟、实用小工具与创作实验。点击对应卡片即可启动进入。
       </p>
 
-      <!-- 快捷搜索框 -->
+      <!-- 快捷过滤搜索框 -->
       <div class="pt-2 max-w-md mx-auto">
         <div class="relative flex items-center">
-          <i class="ph ph-magnifying-glass absolute left-3.5 text-slate-400 text-lg"></i>
+          <i data-lucide="search" class="w-5 h-5 absolute left-3.5 text-slate-400"></i>
           <input 
             type="text" 
             id="searchInput" 
-            placeholder="搜索项目名称、分类或描述..." 
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition shadow-inner"
+            placeholder="搜索项目名称、分类标签或描述..." 
+            class="w-full pl-11 pr-4 py-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition shadow-inner"
           >
         </div>
       </div>
     </div>
   </header>
 
+  <!-- 卡片内容区域：严格统一网格 -->
   <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 flex-1">
-    <!-- 统一网格布局，所有卡片宽高严格一致对齐 -->
-    <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 items-stretch">
+    <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
 
-      <!-- ==================== 已上线项目 1 ==================== -->
-      <a href="https://zhengjy654321.github.io/jy33/" target="_blank" rel="noopener noreferrer" class="treasure-item box-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- ==================== 正式项目 1 ==================== -->
+      <a href="https://zhengjy654321.github.io/jy33/" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-xl text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
-              <i class="ph-bold ph-atom"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="atom" class="w-5 h-5"></i>
             </div>
-            <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg"></i>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
           <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">
             物理模拟器一
           </h3>
-          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2 h-8">
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">
             滑轮与滑块系统动力学模拟机械能守恒
           </p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="inline-flex items-center gap-1.5 text-indigo-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-ping"></span>
-            物理 / 力学
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+            物理
           </span>
-          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">进入模拟 &rarr;</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- ==================== 已上线项目 2 ==================== -->
-      <a href="https://zhengjy654321.github.io/disc-criticality/" target="_blank" rel="noopener noreferrer" class="treasure-item box-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- ==================== 正式项目 2 ==================== -->
+      <a href="https://zhengjy654321.github.io/disc-criticality/" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xl text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              <i class="ph-bold ph-arrows-clockwise"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="rotate-cw" class="w-5 h-5"></i>
             </div>
-            <i class="ph ph-arrow-up-right text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg"></i>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
           <h3 class="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">
             转盘临界问题模拟
           </h3>
-          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2 h-8">
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">
             转盘上物块的临界问题模拟
           </p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="inline-flex items-center gap-1.5 text-cyan-400">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-            物理 / 圆周运动
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-cyan-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            物理
           </span>
-          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">进入模拟 &rarr;</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 01 -->
-      <a href="https://www.zhihu.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 01 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors">
-              <i class="ph ph-plus"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="compass" class="w-5 h-5"></i>
             </div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">知乎 01</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">知乎</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-blue-300 transition-colors truncate">预留项目 01</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击跳转 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-blue-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+            工具/项目
+          </span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 02 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 02 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="cpu" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 02</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-purple-300 transition-colors truncate">预留项目 02</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-purple-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 03 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 03 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="flask-conical" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 03</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 03</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 04 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 04 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="gauge" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 04</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 04</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 05 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 05 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-violet-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="calculator" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 05</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-violet-300 transition-colors truncate">预留项目 05</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-violet-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 06 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 06 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="orbit" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 06</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-rose-300 transition-colors truncate">预留项目 06</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-rose-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 07 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 07 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="binary" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 07</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-sky-300 transition-colors truncate">预留项目 07</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-sky-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 08 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 08 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-white shadow-md shadow-yellow-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="zap" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-yellow-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 08</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-yellow-300 transition-colors truncate">预留项目 08</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-yellow-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 09 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 09 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-fuchsia-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="activity" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-fuchsia-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 09</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-fuchsia-300 transition-colors truncate">预留项目 09</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-fuchsia-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 10 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 10 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="box" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 10</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-teal-300 transition-colors truncate">预留项目 10</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-teal-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 11 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 11 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="code-2" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 11</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-blue-300 transition-colors truncate">预留项目 11</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-blue-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 12 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 12 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="layers" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 12</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 12</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 13 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 13 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="terminal" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 13</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">预留项目 13</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-cyan-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 14 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 14 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="sliders" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 14</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 14</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 15 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 15 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="trending-up" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 15</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 15</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span class="text-slate-500">待定</span>
-          <span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
         </div>
       </a>
 
-      <!-- 预留空位 16 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 16 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-md shadow-pink-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="waves" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-pink-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 16</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-pink-300 transition-colors truncate">预留项目 16</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-pink-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 17 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 17 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-sky-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="globe" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 17</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 17</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 18 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 18 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-600 flex items-center justify-center text-white shadow-md shadow-violet-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="radio" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 18</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-violet-300 transition-colors truncate">预留项目 18</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-violet-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 19 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 19 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 19</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 19</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 20 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 20 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 to-orange-600 flex items-center justify-center text-white shadow-md shadow-amber-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="disc" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 20</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 20</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 21 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 21 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="git-branch" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 21</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-blue-300 transition-colors truncate">预留项目 21</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-blue-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 22 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 22 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center text-white shadow-md shadow-red-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="sparkle" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-red-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 22</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-red-300 transition-colors truncate">预留项目 22</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-red-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 23 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 23 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="database" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 23</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-teal-300 transition-colors truncate">预留项目 23</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-teal-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 24 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 24 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-700 flex items-center justify-center text-white shadow-md shadow-indigo-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="server" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 24</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 24</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 25 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 25 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-fuchsia-600 to-pink-600 flex items-center justify-center text-white shadow-md shadow-fuchsia-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="layout-grid" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-fuchsia-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 25</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-fuchsia-300 transition-colors truncate">预留项目 25</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-fuchsia-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-fuchsia-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 26 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 26 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="lightbulb" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 26</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 26</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 27 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 27 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="network" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 27</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">预留项目 27</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-cyan-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 28 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 28 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center text-white shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="pie-chart" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 28</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-purple-300 transition-colors truncate">预留项目 28</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-purple-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 29 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 29 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-rose-600 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="boxes" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 29</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 29</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 30 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 30 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-violet-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="radio-tower" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 30</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-violet-300 transition-colors truncate">预留项目 30</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-violet-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 31 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 31 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 31</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 31</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 32 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 32 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="scan-line" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 32</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-blue-300 transition-colors truncate">预留项目 32</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-blue-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 33 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 33 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="satellite" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 33</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-teal-300 transition-colors truncate">预留项目 33</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-teal-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 34 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 34 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="flame" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 34</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-rose-300 transition-colors truncate">预留项目 34</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-rose-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 35 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 35 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="monitor" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-sky-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 35</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-sky-300 transition-colors truncate">预留项目 35</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-sky-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 36 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 36 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-fuchsia-600 flex items-center justify-center text-white shadow-md shadow-indigo-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="fingerprint" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 36</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 36</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 37 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 37 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="cog" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 37</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 37</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 38 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 38 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="infinity" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 38</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-purple-300 transition-colors truncate">预留项目 38</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-purple-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 39 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 39 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="power" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 39</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 39</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 40 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 40 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-600 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-cyan-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="shield" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 40</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors truncate">预留项目 40</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-cyan-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 41 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 41 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-500 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="pocket" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 41</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-teal-300 transition-colors truncate">预留项目 41</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-teal-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 42 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 42 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-rose-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="radio" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 42</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 42</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 43 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 43 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-purple-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="target" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-purple-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 43</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-purple-300 transition-colors truncate">预留项目 43</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-purple-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 44 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 44 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-cyan-700 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="share-2" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 44</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-emerald-300 transition-colors truncate">预留项目 44</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-emerald-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 45 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 45 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="hard-drive" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 45</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-blue-300 transition-colors truncate">预留项目 45</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-blue-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 46 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 46 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="key" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 46</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-rose-300 transition-colors truncate">预留项目 46</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-rose-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 47 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 47 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-emerald-600 flex items-center justify-center text-white shadow-md shadow-violet-600/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="crosshair" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-violet-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 47</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-violet-300 transition-colors truncate">预留项目 47</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-violet-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-violet-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 48 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 48 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-teal-500 flex items-center justify-center text-white shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="workflow" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 48</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-amber-300 transition-colors truncate">预留项目 48</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-amber-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 49 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 49 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-teal-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="binary" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 49</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-teal-300 transition-colors truncate">预留项目 49</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-teal-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
-      <!-- 预留空位 50 -->
-      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="treasure-item slot-card p-5 rounded-2xl flex flex-col justify-between group">
+      <!-- 预留项目 50 -->
+      <a href="https://example.com" target="_blank" rel="noopener noreferrer" class="item-card project-card p-5 rounded-2xl group">
         <div>
           <div class="flex items-center justify-between gap-2 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-center text-lg text-slate-400 group-hover:text-slate-200 transition-colors"><i class="ph ph-plus"></i></div>
-            <i class="ph ph-arrow-up-right text-slate-600 group-hover:text-slate-400 transition-colors text-lg"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-pink-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-indigo-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-300 group-hover:text-white transition-colors truncate">预留空位 50</h3>
-          <p class="text-xs text-slate-500 mt-1.5 leading-relaxed line-clamp-2 h-8">待添加项目描述...</p>
+          <h3 class="font-bold text-base text-slate-100 group-hover:text-indigo-300 transition-colors truncate">预留项目 50</h3>
+          <p class="text-xs text-slate-400 mt-1.5 leading-relaxed line-clamp-2">点击进入项目，或在此修改项目说明</p>
         </div>
-        <div class="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between text-xs"><span class="text-slate-500">待定</span><span class="text-slate-500 group-hover:text-slate-300 transition-colors">点击配置 &rarr;</span></div>
+        <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="inline-flex items-center gap-1.5 text-indigo-400 font-medium"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>工具/项目</span>
+          <span class="text-slate-400 group-hover:text-slate-200 transition-colors font-medium">点击打开 &rarr;</span>
+        </div>
       </a>
 
     </div>
 
-    <!-- 实时搜索无匹配结果提示 -->
+    <!-- 搜索无结果反馈提示 -->
     <div id="noResults" class="hidden text-center py-20">
       <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-800/80 text-slate-400 mb-3">
-        <i class="ph ph-magnifying-glass text-xl"></i>
+        <i data-lucide="search-x" class="w-6 h-6"></i>
       </div>
       <p class="text-slate-400 text-sm">未找到与关键词相关的宝藏项目</p>
     </div>
   </main>
 
-  <!-- 底部署名栏 -->
+  <!-- 页面底部 -->
   <footer class="w-full border-t border-slate-800/60 py-6 text-center text-xs text-slate-500 mt-10">
-    <p>© 2026 zjy66的宝藏箱 · 打造属于自己的知识与创作库</p>
+    <p>© 2026 zjy66的宝藏箱 · 属于自己的数字化创作与探索库</p>
   </footer>
 
-  <!-- 实时搜索交互 -->
+  <!-- 搜索与图标加载逻辑 -->
   <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+
+    // 实时搜索过滤逻辑
     const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.treasure-item');
+    const cards = document.querySelectorAll('.item-card');
     const noResults = document.getElementById('noResults');
 
     searchInput.addEventListener('input', (e) => {
